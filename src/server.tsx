@@ -1,5 +1,8 @@
-import express from 'express'
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
+
+import express from 'express'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 
@@ -47,6 +50,8 @@ export const renderApp = (req: express.Request, res: express.Response) => {
         <head>
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta charSet='utf-8' />
+            <link rel="dns-prefetch" href="https://use.typekit.net/" >
+            <link rel="dns-prefetch" href="http://api.openweathermap.org" >
             <link rel="stylesheet" href="https://use.typekit.net/fnb4ppj.css">
             <title>Just Another Weather App</title>
             <meta name="viewport" content="width=device-width, initial-scale=1">

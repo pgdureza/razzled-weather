@@ -1,14 +1,21 @@
 import React from 'react'
 
-import Home from '@pages/Home'
+import { injectGlobal } from '@emotion/css'
+import loadable from '@loadable/component'
 import { Route, Switch } from 'react-router-dom'
 
 import './styles/reset.css'
-import './styles/index.css'
+injectGlobal`
+ html {
+  font-family: 'league-gothic', sans-serif;
+ }
+`
+
+const HomePage = loadable(() => import('@pages/Home'))
 
 const App = () => (
   <Switch>
-    <Route exact={true} path="/" component={Home} />
+    <Route exact={true} path="/" component={HomePage} />
   </Switch>
 )
 

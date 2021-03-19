@@ -1,5 +1,7 @@
-import 'react-app-polyfill/ie11'
+/* eslint-disable @typescript-eslint/no-var-requires */
 import express from 'express'
+
+import 'react-app-polyfill/ie11'
 
 let app = require('./server').default
 

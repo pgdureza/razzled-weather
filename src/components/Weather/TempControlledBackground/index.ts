@@ -1,0 +1,3 @@
+import WeatherTempControlledBackground from './TempControlledBackground'
+
+export default WeatherTempControlledBackground

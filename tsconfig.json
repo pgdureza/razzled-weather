@@ -17,10 +17,11 @@
     "baseUrl": "./src/",
     "paths": {
       "@components/*": ["components/*"],
+      "@storybook/*": ["storybook/*"],
       "@pages/*": ["pages/*"],
+      "@layout/*": ["layout/*"],
       "@styles/*": ["styles/*"],
-      "@icons": ["components/lib/icons/*", "components/lib/icons"],
-      "@images": ["components/lib/images/*", "components/lib/images"],
+      "@lib/*": ["lib/*"],
       "@hooks": ["hooks/*", "hooks"]
     }
   },

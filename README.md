@@ -1,21 +1,16 @@
-# Razzle TypeScript Example
+# Razzled Weather
 
-## How to use
+weather app using `create-razzle-app` with typescript template
 
-<!-- START install generated instructions please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN yarn update-examples TO UPDATE -->Create and start the example:
+## For the Actual weather app
 
-```bash
-npx create-razzle-app --example with-typescript with-typescript
+`yarn start` to start development server
+`yarn build` to create production build
 
-cd with-typescript
-yarn start
-```
-<!-- END install generated instructions please keep comment here to allow auto update -->
+open localhost:3000
 
-## Idea behind the example
-This is an of how to use Razzle with [TypeScript](https://github.com/Microsoft/TypeScript).
+## For the components
 
-Basic razzle will uses Babel to transform TypeScript to plain JavaScript ( with babel-loader ), and uses TypeScript for type-checking.
+`yarn storybook`
 
-Razzle knows how to resolve `.ts` and `.tsx` files out of the box.
+open localhost:6006
