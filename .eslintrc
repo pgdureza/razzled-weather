@@ -1,0 +1,56 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "simple-import-sort"],
+  "rules": {
+    "react/react-in-jsx-scope": 0,
+    "react/display-name": 0,
+    "react/prop-types": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/explicit-member-accessibility": 0,
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "never"],
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          ["^react$"],
+          ["^@?\\w"],
+          // Internal packages.
+          [
+            "^(@/components|@/pages|@/hooks|@/styles|@/icons|@/layouts|@/lib|@/services|@/utilities|@/locales|@/images)",
+            "^\\.\\.(?!/?$)",
+            "^\\.\\./?$",
+            "^\\./(?=.*/)(?!/?$)",
+            "^\\.(?!/?$)",
+            "^\\./?$"
+          ],
+          // Relative imports
+          // Mocks
+          ["^(@/mocks|@utils/mockConfig)(/.*|$)"],
+          // Side effect imports.
+          ["^\\u0000"],
+          // Style imports.
+          ["^.+\\.s?css$"]
+        ]
+      }
+    ]
+  }
+}
