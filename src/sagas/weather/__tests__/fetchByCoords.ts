@@ -18,12 +18,7 @@ describe('handleWeatherFetchByCoords - success', () => {
   })
 
   it('does a call for current lat and lon', () => {
-    expect(generator.next().value).toEqual(
-      call(
-        getRequest,
-        getURL(payload.lat, payload.lon, process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY),
-      ),
-    )
+    expect(generator.next().value).toEqual(call(getRequest, getURL(payload.lat, payload.lon)))
   })
 
   it('dispatches fetchWeatherSuccess', () => {
@@ -36,12 +31,7 @@ describe('handleWeatherFetchByCoords - success', () => {
   })
 
   it('repeats after 1 minute and calls for the same lat and lon', () => {
-    expect(generator.next().value).toEqual(
-      call(
-        getRequest,
-        getURL(payload.lat, payload.lon, process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY),
-      ),
-    )
+    expect(generator.next().value).toEqual(call(getRequest, getURL(payload.lat, payload.lon)))
   })
 
   it('dispatches fetchWeatherSuccess again', () => {

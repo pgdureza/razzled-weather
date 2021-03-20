@@ -8,17 +8,13 @@ import {
 } from '@store/weather'
 import { call, delay, put, takeLatest } from 'redux-saga/effects'
 
-export const getURL = (lat: number, lon: number, appId: string) =>
-  `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${appId}&units=metric`
+export const getURL = (lat: number, lon: number) => `api/getWeather?lat=${lat}&lon=${lon}`
 
 export function* handleWeatherFetchByCoords(action: ReturnType<typeof fetchWeatherByCoords>) {
   try {
     while (true) {
       const { lat, lon } = action.payload
-      const data: IWeatherData = yield call(
-        getRequest,
-        getURL(lat, lon, process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY),
-      )
+      const data: IWeatherData = yield call(getRequest, getURL(lat, lon))
       yield put(fetchWeatherSuccess([data]))
       yield delay(60000)
     }

@@ -20,9 +20,9 @@ describe('handleWeatherFetchByCityName - success', () => {
   it('does a call for all the city names', () => {
     expect(generator.next().value).toEqual(
       all([
-        call(getRequest, getURL('manila', process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY)),
-        call(getRequest, getURL('tokyo', process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY)),
-        call(getRequest, getURL('iloilo', process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY)),
+        call(getRequest, getURL('manila')),
+        call(getRequest, getURL('tokyo')),
+        call(getRequest, getURL('iloilo')),
       ]),
     )
   })
@@ -39,9 +39,9 @@ describe('handleWeatherFetchByCityName - success', () => {
   it('repeats after 1 minute and calls for all the city names', () => {
     expect(generator.next().value).toEqual(
       all([
-        call(getRequest, getURL('manila', process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY)),
-        call(getRequest, getURL('tokyo', process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY)),
-        call(getRequest, getURL('iloilo', process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY)),
+        call(getRequest, getURL('manila')),
+        call(getRequest, getURL('tokyo')),
+        call(getRequest, getURL('iloilo')),
       ]),
     )
   })

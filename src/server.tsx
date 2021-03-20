@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 
+import axios from 'axios'
 import express from 'express'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
@@ -66,9 +67,24 @@ export const renderApp = (req: express.Request, res: express.Response) => {
   }
 }
 
+const URL_TEMPLATE = `https://api.openweathermap.org/data/2.5/weather?{searchParams}&appid=${process.env.OPEN_WEATHER_KEY}&units=metric`
+
 const server = express()
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR!))
+  .get('/api/getWeather', async (req: express.Request, res: express.Response) => {
+    let url
+    if (req.query.city) {
+      url = URL_TEMPLATE.replace('{searchParams}', `q=${req.query.city}`)
+    } else if (req.query.lat && req.query.lon) {
+      url = URL_TEMPLATE.replace(
+        '{searchParams}',
+        `lat=${req.query.lat}&lat=${req.query.lat}&lon=${req.query.lon}`,
+      )
+    }
+    const response = await axios.get(url)
+    res.status(200).json(response.data)
+  })
   .get('/*', (req: express.Request, res: express.Response) => {
     const { html = '', redirect = false } = renderApp(req, res)
     if (redirect) {
