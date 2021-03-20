@@ -2,8 +2,10 @@ import React from 'react'
 
 import { Transition } from 'react-transition-group'
 
+const DURATION = 2000
+
 const defaultStyle = {
-  transition: 'opacity 500ms',
+  transition: `opacity ${DURATION}ms`,
   opacity: 0,
 }
 
@@ -20,7 +22,7 @@ interface IFadeInContainer {
 
 const FadeInContainer: React.FC<IFadeInContainer> = ({ visible, children }) => {
   return (
-    <Transition in={visible} timeout={1000}>
+    <Transition in={visible} timeout={DURATION}>
       {(state) => (
         <div
           style={{

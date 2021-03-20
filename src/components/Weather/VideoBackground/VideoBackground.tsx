@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import FadeInContainer from '@components/FadeInContainer'
+import FadeInContainer from '@components/UI/FadeInContainer'
 
 import { Video } from './styled'
 

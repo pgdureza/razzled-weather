@@ -21,6 +21,7 @@
     "@types/react-redux": "^7.1.16",
     "@types/react-transition-group": "^4.4.1",
     "axios": "^0.21.1",
+    "axios-cache-adapter": "^2.7.3",
     "express": "^4.17.1",
     "query-string": "^7.0.0",
     "react": "^17.0.1",

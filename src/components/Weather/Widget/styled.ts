@@ -8,7 +8,7 @@ const Root = styled.div`
   width: 20rem;
   text-align: center;
   color: white;
-  animation: 1s ${keyframes`${flipInY}`};
+  animation: 1200ms ${keyframes`${flipInY}`};
 `
 
 const IconSection = styled.div`

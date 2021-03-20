@@ -1,3 +1,4 @@
+import _axios from '@lib/network'
 import {
   fetchWeatherByCityNames,
   fetchWeatherError,
@@ -5,17 +6,20 @@ import {
   FetchWeatherTypes,
   IWeatherData,
 } from '@store/weather'
-import axios from 'axios'
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { all, call, put, takeLatest } from 'redux-saga/effects'
 
 export function* handleWeatherFetchByCityName(action: ReturnType<typeof fetchWeatherByCityNames>) {
   try {
-    const q = action.payload
-    const { data }: { data: IWeatherData } = yield call(
-      axios.get,
-      `http://api.openweathermap.org/data/2.5/weather?q=${q}&appid=${process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY}&units=metric`,
+    const responses: { data: IWeatherData }[] = yield all(
+      action.payload.map((q) =>
+        call(
+          _axios.get,
+          `http://api.openweathermap.org/data/2.5/weather?q=${q}&appid=${process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY}&units=metric`,
+        ),
+      ),
     )
-    yield put(fetchWeatherSuccess(data))
+    const dataList = responses.map((response) => response.data)
+    yield put(fetchWeatherSuccess(dataList))
   } catch (error) {
     yield put(fetchWeatherError(error))
   }

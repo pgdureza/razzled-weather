@@ -27,7 +27,7 @@ const reducer: Reducer<IWeatherState> = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        weatherData: [...state.weatherData, payload],
+        weatherData: payload,
       }
     }
 

@@ -12,9 +12,9 @@ export const fetchWeatherByCityNames = (cityNames: string[]) => ({
   payload: cityNames,
 })
 
-export const fetchWeatherSuccess = (data: IWeatherData) => ({
+export const fetchWeatherSuccess = (dataList: IWeatherData[]) => ({
   type: FetchWeatherTypes.FETCH_SUCCESS,
-  payload: data,
+  payload: dataList,
 })
 
 export const fetchWeatherError = (error: Error) => ({

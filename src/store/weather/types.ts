@@ -64,3 +64,7 @@ export enum FetchWeatherTypes {
   FETCH_SUCCESS = 'weather/FETCH_SUCCESS',
   FETCH_ERROR = 'analytics/FETCH_ERROR',
 }
+
+export enum SaveWeatherTypes {
+  BY_COORDS = 'saveWeather/COORDS',
+}
