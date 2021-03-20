@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import styled from '@emotion/styled'
 
 type Variant = 'h1' | 'h2' | 'h3' | 'body' | 'caption'

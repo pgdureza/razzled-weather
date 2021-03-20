@@ -7,6 +7,7 @@ interface IRootProps {
 const Root = styled.div<IRootProps>`
   padding: 3.5rem 1.75rem;
   color: #fff;
+  border-radius: 0.5rem;
   ${({ bgcolor }) => `
     background-color: rgba(${bgcolor}, 0.9);
   `}

@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import { Root } from './styled'
+import FadeInContainer from '@components/FadeInContainer'
+
+import { Video } from './styled'
 
 interface IWeatherVideoBackgroundProps extends React.HTMLAttributes<HTMLSpanElement> {
   icon: string
@@ -19,17 +21,25 @@ const VIDEO_MAP = {
   '50': 'https://cdn.flixel.com/flixel/vwqzlk4turo2449be9uf.hd.mp4',
 }
 
-const WeatherVideoBackground: React.FC<IWeatherVideoBackgroundProps> = ({ icon }) => {
+const WeatherVideoBackground: React.FC<IWeatherVideoBackgroundProps> = ({ icon = '' }) => {
+  const [isVideoReady, setIsVideoReady] = useState(false)
   const key = icon.slice(0, 2)
   const src = VIDEO_MAP[key]
+
+  const handleLoad = () => {
+    setIsVideoReady(true)
+  }
+
   if (!src) {
     return null
   }
 
   return (
-    <Root autoPlay muted loop>
-      <source src={src} type={'video/mp4'} />
-    </Root>
+    <FadeInContainer visible={isVideoReady}>
+      <Video autoPlay muted loop onLoadedData={handleLoad}>
+        <source src={src} type={'video/mp4'} />
+      </Video>
+    </FadeInContainer>
   )
 }
 

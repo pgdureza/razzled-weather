@@ -21,8 +21,11 @@
       "@pages/*": ["pages/*"],
       "@layout/*": ["layout/*"],
       "@styles/*": ["styles/*"],
+      "@store/*": ["store/*"],
+      "@store": ["store"],
+      "@sagas/*": ["sagas/*"],
       "@lib/*": ["lib/*"],
-      "@hooks": ["hooks/*", "hooks"]
+      "@hooks/*": ["hooks/*"]
     }
   },
   "include": ["src"]

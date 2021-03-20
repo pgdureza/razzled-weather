@@ -1,15 +1,15 @@
 import React from 'react'
 
 import Typography from '@components/Typography'
+import { IWeatherData } from '@store/weather'
 
 import WeatherIcon from '../Icon'
 import WeatherTempControlledBackground from '../TempControlledBackground'
-import { IWeatherProps } from '../type'
 import WeatherWidgetReadings from './Readings'
 import { Root } from './styled'
 
 interface IWeatherWidgetProps {
-  weatherData: IWeatherProps
+  weatherData: IWeatherData
 }
 
 const WeatherWidget: React.FC<IWeatherWidgetProps> = ({ weatherData }) => {

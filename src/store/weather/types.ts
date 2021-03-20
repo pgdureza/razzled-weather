@@ -36,7 +36,7 @@ export interface ISys {
   sunset: number
 }
 
-export interface IWeatherProps {
+export interface IWeatherData {
   coord: ICoord
   weather: IWeather[]
   base: string
@@ -50,4 +50,17 @@ export interface IWeatherProps {
   id: number
   name: string
   cod: number
+}
+
+export interface IWeatherState {
+  isFetching: boolean
+  weatherData: IWeatherData[]
+  error: null | Error
+}
+
+export enum FetchWeatherTypes {
+  FETCH_BY_COORDS = 'weather/FETCH_BY_COORDS',
+  FETCH_BY_CITY_NAMES = 'weather/FETCH_BY_CITY_NAMES',
+  FETCH_SUCCESS = 'weather/FETCH_SUCCESS',
+  FETCH_ERROR = 'analytics/FETCH_ERROR',
 }
