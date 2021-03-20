@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+// eslint-disable-next-line simple-import-sort/imports
+import 'react-app-polyfill/ie11'
+import 'react-app-polyfill/stable'
+
 import React from 'react'
 
 import { hydrate } from 'react-dom'

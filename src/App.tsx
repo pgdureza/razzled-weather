@@ -5,6 +5,7 @@ import loadable from '@loadable/component'
 import store from 'configureStore'
 import { Provider } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
+import Home from '@pages/Home'
 
 import './styles/reset.css'
 injectGlobal`
@@ -13,12 +14,10 @@ injectGlobal`
  }
 `
 
-const HomePage = loadable(() => import('@pages/Home'))
-
 const App = () => (
   <Provider store={store}>
     <Switch>
-      <Route exact={true} path="/" component={HomePage} />
+      <Route exact={true} path="/" component={Home} />
     </Switch>
   </Provider>
 )
