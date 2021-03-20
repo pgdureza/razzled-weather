@@ -1,4 +1,4 @@
-import _axios from '@lib/network'
+import { getRequest } from '@lib/network'
 import {
   fetchWeatherByCityNames,
   fetchWeatherError,
@@ -6,22 +6,26 @@ import {
   FetchWeatherTypes,
   IWeatherData,
 } from '@store/weather'
-import { all, call, put, takeLatest } from 'redux-saga/effects'
+import { all, call, delay, put, takeLatest } from 'redux-saga/effects'
+
+export const getURL = (q: string, appId: string) =>
+  `http://api.openweathermap.org/data/2.5/weather?q=${q}&appid=${appId}&units=metric`
 
 export function* handleWeatherFetchByCityName(action: ReturnType<typeof fetchWeatherByCityNames>) {
   try {
-    const responses: { data: IWeatherData }[] = yield all(
-      action.payload.map((q) =>
-        call(
-          _axios.get,
-          `http://api.openweathermap.org/data/2.5/weather?q=${q}&appid=${process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY}&units=metric`,
+    while (true) {
+      const dataList: IWeatherData[] = yield all(
+        action.payload.map((q) =>
+          call(getRequest, getURL(q, process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY)),
         ),
-      ),
-    )
-    const dataList = responses.map((response) => response.data)
-    yield put(fetchWeatherSuccess(dataList))
+      )
+      yield put(fetchWeatherSuccess(dataList))
+      yield delay(60000)
+    }
   } catch (error) {
-    yield put(fetchWeatherError(error))
+    yield put(
+      fetchWeatherError(new Error(error?.response?.data?.message || 'Oops! Something went wrong.')),
+    )
   }
 }
 

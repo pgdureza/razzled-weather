@@ -12,13 +12,11 @@ interface IWeatherListProps {
 
 const DURATION_PER_WEATHER_DATE = 5000
 
-let timer
-
 const WeatherList: React.FC<IWeatherListProps> = ({ list }) => {
   const [activeIndex, setActiveIndex] = useState(0)
   useEffect(() => {
     if (list.length > 1) {
-      timer = setInterval(() => {
+      const timer = setInterval(() => {
         setActiveIndex((activeIndex) => {
           if (activeIndex + 1 < list.length) {
             return activeIndex + 1
@@ -33,7 +31,7 @@ const WeatherList: React.FC<IWeatherListProps> = ({ list }) => {
   }, [])
 
   return (
-    <>
+    <div data-testid="weather-list">
       {list.map((weatherData, index) => (
         <FadeInContainer key={weatherData.name} visible={index === activeIndex}>
           <WeatherVideoBackground icon={weatherData?.weather[0].icon} />
@@ -44,7 +42,7 @@ const WeatherList: React.FC<IWeatherListProps> = ({ list }) => {
           )}
         </FadeInContainer>
       ))}
-    </>
+    </div>
   )
 }
 

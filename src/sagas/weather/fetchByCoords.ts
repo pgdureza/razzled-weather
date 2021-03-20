@@ -1,4 +1,4 @@
-import _axios from '@lib/network'
+import { getRequest } from '@lib/network'
 import {
   fetchWeatherByCoords,
   fetchWeatherError,
@@ -6,18 +6,26 @@ import {
   FetchWeatherTypes,
   IWeatherData,
 } from '@store/weather'
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { call, delay, put, takeLatest } from 'redux-saga/effects'
+
+export const getURL = (lat: number, lon: number, appId: string) =>
+  `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${appId}&units=metric`
 
 export function* handleWeatherFetchByCoords(action: ReturnType<typeof fetchWeatherByCoords>) {
   try {
-    const { lat, lon } = action.payload
-    const { data }: { data: IWeatherData } = yield call(
-      _axios.get,
-      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY}&units=metric`,
-    )
-    yield put(fetchWeatherSuccess([data]))
+    while (true) {
+      const { lat, lon } = action.payload
+      const data: IWeatherData = yield call(
+        getRequest,
+        getURL(lat, lon, process.env.RAZZLE_RUNTIME_OPEN_WEATHER_KEY),
+      )
+      yield put(fetchWeatherSuccess([data]))
+      yield delay(60000)
+    }
   } catch (error) {
-    yield put(fetchWeatherError(error))
+    yield put(
+      fetchWeatherError(new Error(error?.response?.data?.message || 'Oops! Something went wrong.')),
+    )
   }
 }
 

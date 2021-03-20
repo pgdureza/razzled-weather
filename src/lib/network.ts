@@ -1,12 +1,18 @@
 import axios from 'axios'
-import { setupCache } from 'axios-cache-adapter'
 
-const cache = setupCache({
-  maxAge: 15 * 60 * 1000,
-})
+import { getWithExpiry, setWithExpiry } from './cache'
 
-const _axios = axios.create({
-  adapter: cache.adapter,
-})
+const getRequest = async (url: string) => {
+  const dataFromCache = getWithExpiry(url)
 
-export default _axios
+  if (dataFromCache) {
+    return dataFromCache
+  }
+
+  const { data } = await axios.get(url)
+  setWithExpiry(url, data, 300000)
+
+  return data
+}
+
+export { getRequest }

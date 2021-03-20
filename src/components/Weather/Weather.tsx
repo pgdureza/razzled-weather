@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Loader from '@components/Loader'
-import { H1 } from '@components/Typography/Typography.stories'
+import Typography from '@components/Typography'
 import useWeatherData from '@hooks/useWeatherData'
 import OverlayLayout from '@layout/overlay'
 
@@ -13,7 +13,11 @@ const Weather: React.FC<IWeatherProps> = ({ data, error, isLoading }) => {
   if (error) {
     return (
       <OverlayLayout>
-        <H1>Could not load all cities. Please try a different cities. </H1>
+        <div>
+          <Typography variant="h1" as="div">
+            {error.message}
+          </Typography>
+        </div>
       </OverlayLayout>
     )
   }
@@ -29,4 +33,6 @@ const WeatherContainer = () => {
   const weatherData = useWeatherData()
   return <Weather {...weatherData} />
 }
+
+export { Weather }
 export default WeatherContainer
