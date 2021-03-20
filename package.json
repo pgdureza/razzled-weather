@@ -6,7 +6,7 @@
     "start:tsc": "tsc -b -w --preserveWatchOutput",
     "start": "concurrently \"yarn start:tsc\" \"razzle start\"",
     "build": "tsc -b && razzle build",
-    "test": "jest --watchAll",
+    "test": "jest --watchAll --silent",
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "format": "prettier --write .",
     "start:prod": "NODE_ENV=production node build/server.js",

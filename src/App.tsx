@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { injectGlobal } from '@emotion/css'
-import loadable from '@loadable/component'
 import store from 'configureStore'
 import { Provider } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
