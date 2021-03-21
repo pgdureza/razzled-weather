@@ -1,23 +1,27 @@
 import { rootSaga } from '@sagas/index'
-import rootReducer from '@store'
+import rootReducer, { IApplicationState } from '@store'
 import { applyMiddleware, compose, createStore, Middleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createLogger } from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
 
-let composeEnhancers = compose
-const loggerMiddleware = createLogger({ collapsed: true })
-const sagaMiddleware = createSagaMiddleware()
+const configureStore = (state: Partial<IApplicationState> = {}) => {
+  let composeEnhancers = compose
+  const loggerMiddleware = createLogger({ collapsed: true })
+  const sagaMiddleware = createSagaMiddleware()
 
-let middlewares: ReadonlyArray<Middleware> = [sagaMiddleware]
+  let middlewares: ReadonlyArray<Middleware> = [sagaMiddleware]
 
-if (process.env.NODE_ENV === 'development') {
-  middlewares = middlewares.concat(loggerMiddleware)
-  composeEnhancers = composeWithDevTools({})
+  if (process.env.NODE_ENV === 'development') {
+    middlewares = middlewares.concat(loggerMiddleware)
+    composeEnhancers = composeWithDevTools({})
+  }
+
+  const store = createStore(rootReducer, state, composeEnhancers(applyMiddleware(...middlewares)))
+
+  const runningSaga = sagaMiddleware.run(rootSaga)
+
+  return { store, runningSaga }
 }
 
-const store = createStore(rootReducer, {}, composeEnhancers(applyMiddleware(...middlewares)))
-
-sagaMiddleware.run(rootSaga)
-
-export default store
+export default configureStore

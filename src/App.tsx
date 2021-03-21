@@ -14,11 +14,9 @@ injectGlobal`
 `
 
 const App = () => (
-  <Provider store={store}>
-    <Switch>
-      <Route exact={true} path="/" component={Home} />
-    </Switch>
-  </Provider>
+  <Switch>
+    <Route exact={true} path="/" component={Home} />
+  </Switch>
 )
 
 export default App

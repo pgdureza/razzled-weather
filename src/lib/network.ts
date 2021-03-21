@@ -1,17 +1,15 @@
 import axios from 'axios'
-
-import { getWithExpiry, setWithExpiry } from './cache'
+import Cookies from 'js-cookie'
 
 const getRequest = async (url: string) => {
-  const dataFromCache = getWithExpiry(url)
+  const dataFromCache = Cookies.getJSON(url)
 
   if (dataFromCache) {
     return dataFromCache
   }
 
   const { data } = await axios.get(url)
-  setWithExpiry(url, data, 300000)
-
+  Cookies.set(url, data, { expires: 1 / 288 })
   return data
 }
 

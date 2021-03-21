@@ -5,9 +5,11 @@ import React from 'react'
 import axios from 'axios'
 import express from 'express'
 import { renderToString } from 'react-dom/server'
+import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom'
 
 import App from './App'
+import configureStore from './configureStore'
 
 let assets: any
 
@@ -35,10 +37,13 @@ const jsScriptTagsFromAssets = (assets, entrypoint, extra = '') => {
 export const renderApp = (req: express.Request, res: express.Response) => {
   const context: any = {}
 
+  const { store } = configureStore({})
   const markup = renderToString(
-    <StaticRouter context={context} location={req.url}>
-      <App />
-    </StaticRouter>,
+    <Provider store={store}>
+      <StaticRouter context={context} location={req.url}>
+        <App />
+      </StaticRouter>
+    </Provider>,
   )
 
   if (context.url) {
