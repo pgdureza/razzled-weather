@@ -10,7 +10,6 @@ using `city=<name1>,<name2>` to determine which cities to show
 
 [https://razzled-weather.vercel.app/?city=manila,hawaii,canada,tokyo,singapore](https://razzled-weather.vercel.app/?city=manila,hawaii,canada,tokyo,singapore)
 
-
 using no query string will ask permision to use your geolocation.
 
 [https://razzled-weather.vercel.app/](https://razzled-weather.vercel.app/)
@@ -33,5 +32,3 @@ open localhost:3000
 
 `yarn storybook`
 open localhost:6006
-
-

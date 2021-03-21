@@ -9,11 +9,15 @@ import { hydrate } from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 
 import App from './App'
+import store from 'configureStore'
+import { Provider } from 'react-redux'
 
 hydrate(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root'),
 )
 

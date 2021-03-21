@@ -1,10 +1,8 @@
 import React from 'react'
 
 import { injectGlobal } from '@emotion/css'
-import store from 'configureStore'
-import { Provider } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
 import Home from '@pages/Home'
+import { Route, Switch } from 'react-router-dom'
 
 import './styles/reset.css'
 injectGlobal`
@@ -14,11 +12,9 @@ injectGlobal`
 `
 
 const App = () => (
-  <Provider store={store}>
-    <Switch>
-      <Route exact={true} path="/" component={Home} />
-    </Switch>
-  </Provider>
+  <Switch>
+    <Route exact={true} path="/" component={Home} />
+  </Switch>
 )
 
 export default App

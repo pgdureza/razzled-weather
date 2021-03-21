@@ -3,8 +3,10 @@
 import React from 'react'
 
 import axios from 'axios'
+import store from 'configureStore'
 import express from 'express'
 import { renderToString } from 'react-dom/server'
+import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom'
 
 import App from './App'
@@ -36,9 +38,11 @@ export const renderApp = (req: express.Request, res: express.Response) => {
   const context: any = {}
 
   const markup = renderToString(
-    <StaticRouter context={context} location={req.url}>
-      <App />
-    </StaticRouter>,
+    <Provider store={store}>
+      <StaticRouter context={context} location={req.url}>
+        <App />
+      </StaticRouter>
+    </Provider>,
   )
 
   if (context.url) {
